@@ -8,8 +8,8 @@ from sklearn.metrics import (
     r2_score,
 )
 
-def evaluate_regression(y_pred,
-                   y_test,
+def evaluate_regression(y_test,
+                   y_pred,
                    model_name="Model",
                    print_metrics = True,
                    plot=False
