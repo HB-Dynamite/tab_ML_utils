@@ -9,7 +9,7 @@ description = "Utilities for tabular machine learning"
 requires-python = ">=3.10"
 
 dependencies = [
-    "pandas"
+    "pandas",
     "numpy",
     "matplotlib",
     "seaborn",
