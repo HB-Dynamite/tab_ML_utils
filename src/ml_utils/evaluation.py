@@ -74,7 +74,7 @@ def evaluate_regression(y_pred,
     Evaluate predictions and print the regression metrics:
 
     >>> y_pred = model.predict(X_test)
-    >>> metrics = evaluate_model(
+    >>> metrics = evaluate_regression(
     ...     y_pred,
     ...     y_test,
     ...     model_name="XGBoost",
@@ -82,7 +82,7 @@ def evaluate_regression(y_pred,
 
     Evaluate predictions and additionally display diagnostic plots:
 
-    >>> metrics = evaluate_model(
+    >>> metrics = evaluate_regression(
     ...     y_pred,
     ...     y_test,
     ...     model_name="XGBoost",
@@ -90,8 +90,7 @@ def evaluate_regression(y_pred,
     ... )
     """
 
-    # Print model Name
-    print(f"----- Evaluating {model_name} -----")
+    
 
     # Ensure dimensions of predictions
     y_pred = np.array(y_pred).reshape(-1,1)
@@ -107,6 +106,8 @@ def evaluate_regression(y_pred,
 
     # print metrics if needed
     if print_metrics:
+      # Print model Name
+      print(f"----- Evaluating {model_name} -----")
       for metric_name, metric_value in metrics.items():
         print(f"{metric_name}: {metric_value:.4f}")
 
@@ -143,7 +144,7 @@ def evaluate_regression(y_pred,
       ax[2].set_xlabel("Residual")
       ax[2].set_ylabel("Count")
       ax[2].set_title("Residual Distribution")
-      ax[2].text(0.8, 0.9, f"Model\nunderesitmates", transform = ax[2].transAxes, ha = "center")
+      ax[2].text(0.8, 0.9, f"Model\nunderestimates", transform = ax[2].transAxes, ha = "center")
       ax[2].text(0.15, 0.9, f"Model\noverestimates", transform = ax[2].transAxes, ha = "center")
       ax[2].legend()
 
