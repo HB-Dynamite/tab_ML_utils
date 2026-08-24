@@ -12,7 +12,8 @@ def evaluate_regression(y_test,
                    y_pred,
                    model_name="Model",
                    print_metrics = True,
-                   plot=False
+                   plot=False, 
+                   n_bins=30
                    ):
     """
     Evaluate the predictions of a regression model.
@@ -42,6 +43,8 @@ def evaluate_regression(y_test,
         1. Predicted vs. actual values.
         2. Distributions of actual and predicted values.
         3. Distribution of residuals.
+    n_bins : int, default=30
+        Number of bins to use for the histograms in the distribution plots.
 
     Returns
     -------
@@ -123,8 +126,16 @@ def evaluate_regression(y_test,
       ax[0].set_title("Predicted vs Actual")
 
       # Plot 2: Histogram of true vs predicted
-      sns.histplot(x=np.asarray(y_test).ravel(), ax=ax[1], label="Actual (y_test)", kde=True, color="red")
-      sns.histplot(x=np.asarray(y_pred).ravel(), ax=ax[1], label="Predicted (y_pred)", kde=True, color= "blue")
+
+      bins = np.linspace(
+        min(y_test.min(), y_pred.min()),
+        max(y_test.max(), y_pred.max()),
+        n_bins
+      )
+      
+
+      sns.histplot(x=np.asarray(y_test).ravel(), ax=ax[1], label="Actual (y_test)", kde=True, color="red",bins=bins)
+      sns.histplot(x=np.asarray(y_pred).ravel(), ax=ax[1], label="Predicted (y_pred)", kde=True, color= "blue",bins=bins)
       ax[1].set_xlabel("Value")
       ax[1].set_ylabel("Count")
       ax[1].set_title("Distribution of Actual vs Predicted")
